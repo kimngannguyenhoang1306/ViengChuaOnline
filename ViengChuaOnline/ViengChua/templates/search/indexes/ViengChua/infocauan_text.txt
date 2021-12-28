@@ -1,0 +1,9 @@
+{{ object.CommentUser.HoTen }}
+{{ object.HoTen }}
+{{ object.NgaySinh }}
+{{ object.PhapDanh }}
+{{ object.GioiTinh }}
+{{ object.DiaChi }}
+{{ object.QueQuan }}
+{{ object.CommentUser }}
+{{ object.LoiCauNguyen }}

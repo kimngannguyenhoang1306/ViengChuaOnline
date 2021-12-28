@@ -1,0 +1,49 @@
+{% extends "ViengChua/MainPage.html" %}
+
+{% block title %}
+    <title> Cúng Phật </title>
+    <link rel="shortcut icon" href="http://tuvien.com/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet"  href="{% static 'ViengChua/cung.css' %}">
+<style>
+    .banner{
+    height: 130%;
+    width: 100%;
+    background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),
+    url({% static 'ViengChua/diatangvuong.png' %}) no-repeat center center/cover;
+    }
+</style>
+{% endblock %}
+
+{% block form %}
+    <img src="{% static 'ViengChua/source.gif' %}" class="logo1">
+    <div id="form">
+        <img src="{% static 'ViengChua/thachim.png' %}" class="thachim">
+        <img src="{% static 'ViengChua/thachim.png' %}" class="thachim1">
+        <img src="{% static 'ViengChua/bocau.gif' %}" class="bocau">
+        <img src="{% static 'ViengChua/bocau.gif' %}" class="bocau1">
+        <img src="{% static 'ViengChua/bocau.gif' %}" class="bocau2">
+        <img src="{% static 'ViengChua/bocau.gif' %}" class="bocau3">
+    </div>
+    <br>
+    <div id="form1">
+        <img src="{% static 'ViengChua/thaca.gif' %}" class="thaca">
+        <img src="{% static 'ViengChua/thaca.gif' %}" class="thaca1">
+    </div>
+    <button class="button button2" id="formButton">Thả Chim</button>
+    <button class="button1 button3" id="formButton1">Thả Cá</button>
+    <script>
+      $('#formButton').on('click', function() {
+          if ($('#form').css('opacity') == 0) $('#form').css('opacity', 1);
+          else $('#form').css('opacity', 0);
+      });
+      $('#formButton1').on('click', function() {
+          if ($('#form1').css('opacity') == 0) $('#form1').css('opacity', 1);
+          else $('#form1').css('opacity', 0);
+      });
+    </script>
+{% endblock %}
+
+{% block image %}
+{% endblock %}

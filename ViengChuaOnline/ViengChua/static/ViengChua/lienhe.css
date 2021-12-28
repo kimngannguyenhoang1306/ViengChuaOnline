@@ -1,0 +1,230 @@
+*{
+     font-family: 'Roboto', sans-serif;
+     box-sizing: border-box;
+ }
+
+.column {
+  float: left;
+  width: 110px;
+}
+
+section .container{
+     position: relative;
+     display:flex;
+     z-index: 3;
+ }
+
+section .container .containerinfo{
+     position: absolute;
+     top: 35px;
+     width: 360px;
+     height: 500px;
+     background: #0f3959;
+     z-index: 1;
+     padding: 20px;
+     display: flex;
+     margin-top: 230%;
+     margin-left: 13%;
+     flex-direction: column;
+     box-shadow: 0 20px 20px rgba(0,0,0,0.2);
+}
+
+section .container .containerinfo h2{
+     color: #fff;
+     font-size: 30px;
+     margin: 10px 0;
+ }
+section .container .containerinfo li{
+     position: relative;
+     list-style: none;
+     display: flex;
+     margin-top: 20px;
+     margin-right: 10px;
+     cursor: pointer;
+}
+section .container .containerinfo li span{
+     color: #fff;
+     margin-left: 20px ;
+     font-weight: 500;
+     opacity: 0.5;
+     font-size: 18px;
+ }
+ /*Hiệu Ứng Hover Cho Thẻ Li*/
+ section .container .containerinfo li:hover span{
+     opacity: 1;
+ }
+
+ fieldset
+{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 40%;
+    margin-left: 50%;
+    margin-top: 6%;
+    list-style-type: none;
+    padding: 0% 2% 1%;
+    border-radius: 15px;
+}
+
+legend
+{
+    font-family: Helvetica, Arial;
+    color: #36A0AC;
+    font-size: 38px;
+}
+
+fieldset li
+{
+   margin: 0px 2px;
+}
+
+fieldset label
+{
+   display: inline-block;
+   min-width: 25%;
+   color: white;
+   font-size: 100%;
+}
+
+fieldset input, textarea
+{
+    padding: 7.5px 15px;
+    width: 70%;
+    border: 1px solid #cccccc;
+    outline: none;
+    border-radius: 15px;
+    display:inline-block;
+}
+
+fieldset textarea
+{
+    height: 70px;
+    border-radius: 15px;
+    vertical-align: middle;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#submit, input#search
+{
+    display: inline-block;
+    padding: 7px 15px;
+    border-radius: 2px;
+    background-color: #36A0AC;
+    color: white;
+    width: 100%;
+    font-size: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.footer {
+    position: absolute;
+    padding: 0px;
+    text-align: center;
+    margin-top: 46%;
+    color: white;
+}
+
+.fa
+{
+    width: 150%;
+    font-size: 20px;
+}
+
+label
+{
+    color:white;
+    font-weight:bold;
+    font-size:100%;
+    padding:15px;
+}
+
+ul#id_models
+{
+    margin-left: 20%;
+    margin-top: 2%;
+    width: 100%;
+    font-size:100%
+}
+
+input#id_q
+{
+    padding:8px;
+    border-radius:8px;
+    width: 80%;
+}
+
+ul li::marker
+{
+    content: "🧡";
+}
+ul#id_models
+{
+    margin-left:30%;
+}
+
+
+
+body{
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.hide {
+    max-height: 0 !important;
+}
+
+.dropdown1{
+    margin-top:2%;
+	border: 0.1em solid white;
+	width: 75%;
+	margin-bottom: 1em;
+	display: inline-block;
+}
+
+.dropdown1 .title{
+	margin: .3em .3em .3em .3em;
+	width: 97%;
+	color:white;
+	background-color:#36A0AC;
+	font-size:120%;
+	font-weight:bold;
+}
+
+.dropdown1 .menu{
+	transition: max-height .5s ease-out;
+	max-height: 15em;
+	overflow: hidden;
+}
+
+.dropdown1 .menu .option{
+	margin: .2em .2em .2em .2em;
+	margin-top: 0.3em;
+	font-size:80%;
+}
+
+.dropdown1 .menu .option:hover{
+	background: black;
+	font-size:80%;
+}
+
+.pointerCursor:hover{
+	cursor: pointer;
+	font-size:120%;
+}
+
+.searchform
+{
+    position: absolute;
+    margin-top: 26%;
+    margin-left: 50%;
+    width: 40%;
+    z-index: 1;
+    border: 1px solid white;
+    padding:15px;
+    list-style-type: none;
+    padding: 1% 2% 1%;
+    border-radius: 15px;
+}

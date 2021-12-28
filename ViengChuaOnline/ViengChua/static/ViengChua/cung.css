@@ -1,0 +1,174 @@
+.banner{
+    height: 130%;
+    background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),
+    url(causieu1.png) no-repeat center center/cover ;
+}
+
+.button {
+    z-index:1;
+    border-radius: 8px;
+    margin-top: 35%;
+    margin-left: 22%;
+    background-color: Crimson;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+    position:absolute;
+    min-width: 11%;
+    min-height: 6.5%;
+}
+
+.button1 {
+    z-index:1;
+    border-radius: 8px;
+    margin-top: 35%;
+    margin-left: 65%;
+    background-color: Crimson;
+    border: none;
+    color: white;
+    min-width: 11%;
+    min-height: 6.5%;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    position:absolute;
+    font-size: 20px;
+}
+
+
+.button2 {background-color: LightSalmon;}
+
+.button3 {background-color: LightSalmon;}
+
+.logo1
+{
+    position:absolute;
+    z-index:1;
+    margin: auto;
+    height: 40vh;
+    margin-top: 32%;
+    margin-left: 20%;
+}
+
+#form {
+    opacity: 0;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -ms-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
+}
+
+#form1 {
+    opacity: 0;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -ms-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
+}
+
+.traicay {
+    position:absolute;
+    weight: 25%;
+    height: 25%;
+    margin-top: 45%;
+    margin-left: 7%;
+}
+
+.heoquay {
+    position:absolute;
+    weight: 25%;
+    height: 25%;
+    margin-top: 45%;
+    margin-left: 47%;
+}
+
+.thachim {
+      position:absolute;
+      weight: 25%;
+      height: 25%;
+      margin-top: 47.5%;
+      margin-left: -13.8%;
+}
+
+.thachim1 {
+      position:absolute;
+      weight: 25%;
+      height: 25%;
+      margin: auto;
+      margin-top: 47.5%;
+      margin-left: 67.3%;
+      transform: rotateY(180deg);
+}
+
+.bocau {
+      position:absolute;
+      margin: auto;
+      weight: 23%;
+      height: 23%;
+      margin-top: 27.5%;
+      margin-left: -10%;
+}
+
+.bocau1 {
+      position:absolute;
+      margin: auto;
+      weight: 23%;
+      height: 23%;
+      margin-top: 37%;
+      margin-left: -3%;
+      transform: rotateY(180deg);
+}
+
+.bocau2 {
+      position:absolute;
+      margin: auto;
+      weight: 23%;
+      height: 23%;
+      margin-top: 37%;
+      margin-left: 56.3%;
+}
+
+.bocau3 {
+      position:absolute;
+      margin: auto;
+      weight: 23%;
+      height: 23%;
+      margin-top: 27.5%;
+      margin-left: 62.3%;
+      transform: rotateY(180deg);
+}
+
+.thaca {
+      position:absolute;
+      weight: 28%;
+      height: 28%;
+      margin-top: 44.5%;
+      margin-left: 6%;
+      transform: rotateY(180deg);
+
+}
+
+.thaca1 {
+      position:absolute;
+      weight: 28%;
+      height: 28%;
+      margin-top: 44.5%;
+      margin-left: 48%;
+}
+
+.searchform
+{
+    display: none;
+}
+
+.footer {
+    display: none;
+}
+

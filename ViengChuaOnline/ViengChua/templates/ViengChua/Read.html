@@ -1,0 +1,52 @@
+{% extends "ViengChua/List.html" %}
+{% load static %}
+{% load temp_tags %}
+
+{% block title %}
+<title>Book</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#content").css("z-index", "2");
+            $('body').click(function(evt){
+                if(evt.target.id == "content" || evt.target.id == "myInput")
+                    return;
+                if($(evt.target).closest('#content').length || $(evt.target).closest('#myInput').length)
+                    return;
+                $("#content").toggle();
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block form %}
+<div id="content">
+    {% for read in Paginated %}
+        {{ read | safe | linebreaks }}
+    {% empty %}
+        <p>No articles yet</p>
+    {% endfor %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if Paginated.has_previous %}
+            <a href="?page={{ Paginated.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ Paginated.number }} of {{ Paginated.paginator.num_pages }}
+        </span>
+        {% if Paginated.has_next %}
+            <a href="?page={{ Paginated.next_page_number }}">Next</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+{% endblock %}
+
+{% block list1 %}
+{% endblock %}
+
+{% block image %}
+{% endblock %}

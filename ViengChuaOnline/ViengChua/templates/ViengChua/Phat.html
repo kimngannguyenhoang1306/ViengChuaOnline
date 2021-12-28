@@ -1,0 +1,37 @@
+{% extends "ViengChua/MainPage.html" %}
+
+{% block title %}
+    <title> Cúng Phật </title>
+    <link rel="shortcut icon" href="http://tuvien.com/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet"  href="{% static 'ViengChua/cung.css' %}">
+{% endblock %}
+
+
+{% block form %}
+
+    <div id="form">
+        <img src="{% static 'ViengChua/source.gif' %}" class="logo1">
+    </div>
+    <br>
+    <div id="form1">
+        <img src="{% static 'ViengChua/traicay.png' %}" class="traicay">
+        <img src="{% static 'ViengChua/heoquay.png' %}" class="heoquay">
+    </div>
+    <button class="button button2" id="formButton">Cúng</button>
+    <button class="button1 button3" id="formButton1">Dâng lễ vật</button>
+    <script>
+        $('#formButton').on('click', function() {
+            if ($('#form').css('opacity') == 0) $('#form').css('opacity', 1);
+            else $('#form').css('opacity', 0);
+        });
+        $('#formButton1').on('click', function() {
+            if ($('#form1').css('opacity') == 0) $('#form1').css('opacity', 1);
+            else $('#form1').css('opacity', 0);
+        });
+    </script>
+{% endblock %}
+
+{% block image %}
+{% endblock %}

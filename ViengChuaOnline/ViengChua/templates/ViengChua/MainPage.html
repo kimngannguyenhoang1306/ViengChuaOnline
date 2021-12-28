@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    {% load temp_tags %}
+    <link rel="stylesheet" href="{% static 'ViengChua/style_1.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title> Đi Chùa Internet, Chùa Online, Chùa Trực Tuyến | Di Chua Internet, Chua Online, Chua Truc Tuyen</title>
+        <link rel="shortcut icon" href="http://tuvien.com/favicon.ico">
+    <style>
+        @font-face {
+            font-family: 'myFirstFont';
+            src: url('{% static 'ViengChua/UTM-ThuPhap-ThienAn.ttf' %}');
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+<div class="banner">
+    <div class = logo>
+        <a href="/">
+            <img src="{% static 'ViengChua/logo.png' %}" class="logo"/>
+        </a>
+    </div>
+    <div class="navbar">
+        <ul>
+            <li class="dropdown">
+                <a href="" class="dropbtn">Phật</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'CungPhat' Phat='QuanAmBoTat' %}">Quan Âm Bồ Tát</a>
+                    <a href="{% url 'CungPhat' Phat='DiaTangVuong' %}">Địa Tạng Vương Bồ Tát</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="{% url 'Login' %}" class="dropbtn">Đăng Kí</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'List' Open='List' TheLoai='CauAn' %}">Đăng Kí Cầu An</a>
+                    <a href="{% url 'List' Open='List' TheLoai='CauSieu' %}">Đăng Kí Cầu Siêu</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">Tủ Sách</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'List' Open='Book' TheLoai='LichSu' %}">Lịch Sử Phật Giáo</a>
+                    <a href="{% url 'List' Open='Book' TheLoai='NghiLe' %}">Nghi Lễ</a>
+                    <a href="{% url 'List' Open='Book' TheLoai='PhatHoc' %}">Phật Học</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">Văn Hóa</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'List' Open='VanHoa' TheLoai='SongDep' %}">Nghệ Thuật Sống Đẹp</a>
+                    <a href="{% url 'List' Open='VanHoa' TheLoai='NauChay' %}">Hướng Dẫn Nấu Chay</a>
+                    <a href="{% url 'List' Open='VanHoa' TheLoai='AnChay' %}">Ăn Chay</a>
+                </div>
+            </li>
+            <li class="dropdown"><a href="{% url 'List' Open='List' TheLoai='Qua' %}" class="dropbtn">Quà Lưu Niệm</a></li>
+            <li class="dropdown"><a href="{% url 'LienHe' %}" class="dropbtn">Liên Hệ</a></li>
+            <li class="dropdown">
+                <a href="{% url 'Login' %}" class="dropbtn">{% get_User %}</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'UpdateInfo' %}">Update Info</a>
+                    <a href="{% url 'ChangePass' %}">Đổi mật khẩu</a>
+                    <a href="{% url 'Logout' %}">Đăng xuất</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="searchform">
+        <form method="get" action="{% url 'haystack_search' %}" class="autocomplete-me">
+            {{ searchform }}
+            <br><input type="submit" value="Search" id="search">
+        </form>
+
+        <div class="ac-results"></div>
+        <script type="text/javascript">
+            $("#id_models").wrap("<div class='menu pointerCursor hide'></div>");
+            $(".menu.pointerCursor.hide").wrap("<div class='title pointerCursor'>Choose...</div>");
+            $(".title.pointerCursor").wrap("<div class='dropdown1'></div>");
+            $( "#id_models li" ).wrap( "<div class='option'></div>" );
+
+
+            function toggleClass(elem,className){
+                if (elem.className.indexOf(className) !== -1){
+                    elem.className = elem.className.replace(className,'');
+                }
+                else{
+                    elem.className = elem.className.replace(/\s+/g,' ') + 	' ' + className;
+                }
+                    return elem;
+            }
+
+            function toggleDisplay(elem){
+                const curDisplayStyle = elem.style.display;
+                if (curDisplayStyle === 'none' || curDisplayStyle === ''){
+                    elem.style.display = 'block';
+                }
+                else{
+                    elem.style.display = 'none';
+                }
+            }
+
+            function toggleMenuDisplay(e){
+                const dropdown1 = e.currentTarget.parentNode;
+                const menu = dropdown1.querySelector('.menu');
+                const icon = dropdown1.querySelector('.fa-angle-right');
+
+                toggleClass(menu,'hide');
+                toggleClass(icon,'rotate-90');
+            }
+
+            //get elements
+            const dropdownTitle = document.querySelector('.dropdown1 .title');
+            const dropdownOptions = document.querySelectorAll('.dropdown1 .option');
+
+            //bind listeners to these elements
+            dropdownTitle.addEventListener('click', toggleMenuDisplay);
+
+            var Autocomplete = function(options) {
+                this.form_selector = options.form_selector
+                this.url = options.url || '/Search/'
+                this.delay = parseInt(options.delay || 300)
+                this.minimum_length = parseInt(options.minimum_length || 2)
+                this.form_elem = null
+                this.query_box = null
+            }
+
+            Autocomplete.prototype.setup = function() {
+                var self = this
+
+                this.form_elem = $(this.form_selector)
+                this.query_box = this.form_elem.find('input[name=q]')
+
+                // Watch the input box.
+                this.query_box.on('keyup', function() {
+                    var query = self.query_box.val()
+                    $('#result').html("")
+
+                if(query.length < self.minimum_length) {
+                    return false
+                }
+
+                self.fetch(query)
+              })
+
+            // On selecting a result, populate the search field.
+                this.form_elem.on('click', '.ac-result', function(ev) {
+                    self.query_box.val($(this).text())
+                    $('.ac-results').html("")
+                    $('#result').html("")
+                    return false
+                })
+            }
+
+            Autocomplete.prototype.fetch = function(query) {
+                var self = this
+                var ajaxData = {
+                    'q' : $('#id_q').val(),
+                }
+                $("#id_models input:checkbox").change(function()
+                {
+                    if($(this).is(':checked'))
+                    {
+                        Object.assign(ajaxData, {models: this.value});
+                        $.ajax({
+                            url: {% url 'haystack_search' %}
+                            , data: {
+                                'q' : ajaxData.q,
+                                'models': ajaxData.models,
+                            }
+                            , success: function(data) {
+                                self.show_results(data);
+                            }
+                        })
+                    }
+                    else
+                    {
+                        $.ajax({
+                            url: {% url 'haystack_search' %}
+                            , data: {
+                                'q' : ajaxData.q,
+                            }
+                            , success: function(data) {
+                                self.show_results(data);
+                            }
+                        })
+                    }
+                });
+                $.ajax({
+                    url: {% url 'haystack_search' %}
+                    , data: {
+                        'q' : ajaxData.q,
+                    }
+                    , success: function(data) {
+                        self.show_results(data);
+                    }
+                })
+            }
+
+            Autocomplete.prototype.show_results = function(data) {
+                // Remove any existing results.
+                $('.ac-results').html("")
+                var success =  $(data).find('#result');
+                $('.ac-results').html(success);
+            }
+
+            $(document).ready(function() {
+                window.autocomplete = new Autocomplete({
+                    form_selector: '.autocomplete-me'
+                    })
+                window.autocomplete.setup()
+
+                $("label[for='id_models_0']").contents().eq(1).replaceWith(" Sách");
+                $("label[for='id_models_1']").contents().eq(1).replaceWith(" Danh Sách Cầu An");
+                $("label[for='id_models_2']").contents().eq(1).replaceWith(" Danh Sách Cầu Siêu");
+                $("label[for='id_models_3']").contents().eq(1).replaceWith(" Văn Hóa");
+            })
+        </script>
+        <div id="result">
+            {% for result in page.object_list %}
+                <a href="{{ result.object.get_absolute_url }}">{{ result.object.HoTen }}{{ result.object.Name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% block form %}
+    {% endblock %}
+
+    {% block image %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".searchform").css("display","none");
+        });
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <a style="margin-top: 1.5%; margin-left: 75%; padding: 5px 10px; text-decoration: none; background:#A08E07; color: white;border-radius: 20%; font-size: 120%; position: absolute" class="Update" href="{% url 'haystack_search' %}"><i class="fa fa-search" aria-hidden="true"> Search</i></a>
+
+    <div class="text">
+      <span>Chùa Online TNT</span>
+      <div class="text1">Tu Viện Phật Giáo Việt Nam</div>
+    </div>
+    <div class="PhatImage">
+        <img id="phat" src="{% static 'ViengChua/BUDDHA3.gif' %}">
+        <img id="phat1" src="{% static 'ViengChua/phat1.png' %}">
+        <img id="phat2" src="{% static 'ViengChua/phat1.png' %}">
+    </div>
+    {% endblock %}
+
+    {% block list %}
+    {% endblock %}
+
+    {% block list1 %}
+    {% endblock %}
+
+    <iframe src="/media/audio.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+    <audio src="/media/audio.mp3" autoplay loop>
+        <source src="/media/audio.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="footer">
+        <h4>
+            <marquee>Xin Quý vị hãy tịnh tâm và chắp tay niệm "Nam Mô A Di Đà Phật" (108 lần) sau khi niệm xong
+                xin Qúy vị tụng hồi hướng "Nguyện đem công đức này, Hướng về khắp tất cả, Đệ tử và chúng sanh,
+                Đều trọn thành Phật đạo."
+            </marquee>
+        </h4>
+    </div>
+</div>
+</body>
+</html>

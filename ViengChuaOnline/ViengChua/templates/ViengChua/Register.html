@@ -1,0 +1,88 @@
+{% extends "ViengChua/MainPage.html" %}
+{% load temp_tags %}
+
+{% block title %}
+    <title>Register</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ViengChua/style_2.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            var lg_name = "{{ lg_name }}";
+            switch (lg_name)
+            {
+                case "đăng nhập":
+                {
+                    $("#DKTK").css("display","block");
+                    break;
+                }
+                case "đăng ký tài khoản":
+                {
+                    $("#DCTK").css("display","block");
+                    break;
+                }
+                case "thay đổi mật khẩu":
+                {
+                    $("#display label").css("min-width", "43%");
+                    break;
+                }
+                case "đăng ký cầu an":
+                {
+                     $("#notice").css("display","block");
+                     $("#itemlist").css("display","block");
+                     $("#display").css("margin-top","8%");
+                     $("#back").css("display","inline-block");
+                     break;
+                }
+                case "đăng ký cầu siêu":
+                {
+                    $("#notice").css("display","block");
+                    $("#itemlist").css("display","block");
+                    $("#display").css("margin-top","8%");
+                    $("#back").css("display","inline-block");
+                    $(".ngay").change(function()
+                    {
+                        var ngaymat = new Date($("#ngaymat").val());
+                        var ngaysinh = new Date($("#ngaysinh").val());
+                        $("#id_HuongDuong").val(ngaymat.getUTCFullYear() - ngaysinh.getUTCFullYear() + 1);
+                    });
+                    $("#id_HuongDuong").attr("readonly", true);
+                    break;
+                }
+            }
+            $("#dk, #back").click(function()
+            {
+                $("#itemlist").toggle();
+                $("#display").toggle();
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block form %}
+<fieldset id="display">
+    <legend id="{{ lg_name|title }}">{{ lg_name|title }}</legend>
+    <p id="notice" style="display:none">*Nhập thông tin người được {{ lg_name|cut:"đăng ký" }}</span></p>
+    <form id="form" action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input id="submit" type="submit" value="Submit">
+        <input id="back" type="submit" value="Back" style="display:none">
+    </form>
+    <div id="DKTK" style="display: none">
+        <span>Chưa có tài khoản?</span>
+        <a href="{% url 'Register' %}" id="Register" style="color: white">Đăng ký</a>
+    </div>
+    <div id="DCTK" style="display: none">
+        <span>Đã có tài khoản?</span>
+        <a href="{% url 'Login' %}" id="Login" style="color: white">Đăng nhập</a>
+    </div>
+</fieldset>
+{% endblock %}
+
+{% block image %}
+{% endblock %}
+

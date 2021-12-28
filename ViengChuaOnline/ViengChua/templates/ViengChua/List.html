@@ -1,0 +1,196 @@
+{% extends "ViengChua/MainPage.html" %}
+{% load temp_tags %}
+
+{% block title %}
+    <title>{{ TheLoai }}</title>
+        {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $(".Delete").click(function(evt)
+            {
+                $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'Delete' %}',
+                    data: { "id": evt.target.id,
+                            "Open": "{{ Open }}",
+                            "TheLoai": "{{ TheLoai }}",
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                    },
+                });
+                $(document).ajaxStop(function(){
+                    window.location.reload();
+                });
+            });
+            $('body').click(function(evt){
+                if(evt.target.id == "content" || evt.target.id == "myInput" || evt.target.id == "searchform")
+                    return;
+                if($(evt.target).closest('#content').length || $(evt.target).closest('#myInput').length || $(evt.target).closest('#searchform').length)
+                    return;
+                $("#content").toggle();
+            });
+            $('.searchform').attr("id", "{{ Open }}");
+
+            $(".list-group-item.list-group-item-action").on('mouseenter', function(){
+                $(this).animate({ marginLeft: +150});
+            });
+            $(".list-group-item.list-group-item-action").on('mouseleave', function(){
+                $(this).animate({ marginLeft: 0}, function() {
+                    $(this).css("overflow","hidden");
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block list %}
+{% if Open != "List" %}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="{% static 'ViengChua/Book.css' %}">
+
+    <div class="container">
+        <h2></h2>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+               title="Type in a name"><br>
+        <ul id="myUL" class="list-group">
+            <span class="list-group-item">Mục Lục</span>
+            {% Choose Open TheLoai as list %}
+            {% for item in list %}
+            <li>
+                <a class="list-group-item" href="{% url 'Read' Open TheLoai item.Name %}">{{ item.Name }} - {{ item.TacGia }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <script>
+            function myFunction() {
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    txtValue = a.textContent || a.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      li[i].style.display = "";
+                    } else {
+                      li[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block list1 %}
+{% if Open == "List" %}
+    <div class="display_list">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'ViengChua/Banhang.css' %}">
+        {% if ID >= 0 %}
+            {% get_List Open TheLoai ID as Paginated %}
+        {% else %}
+            {% get_List Open TheLoai ID='-1' as Paginated %}
+        {% endif %}
+        {% if TheLoai == "Qua" %}
+            <ul class="product" style="margin-top:8%; width:100%; position: absolute;">
+                {% for item in Paginated %}
+                <li style="list-style-type: none; z-index:10; display: inline-block;
+                background:white; padding:10px; width: 20%; margin-left: 10%">
+                    <a>
+                        <img src="{{ item.Image.url }}" alt="img" width="180px" height="180px" style="display:block; position:relative; margin-left: 15%">
+                        {% for name, value in item.get_fields %}
+                            {% if value and name != "ID" and name != "Hình Ảnh" %}
+                                <span>{{ name }}: {{ value | linebreaks }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </a>
+                </li>
+                {% empty %}
+                    <p>No articles yet</p>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            <div id="itemlist" >
+                {% for item in Paginated %}
+                <div style="padding:5px; display:inline-block; border: 2px solid white; border-radius: 15px; background-color: #B18409">
+                    <div style="width:90%; float:left;" class="2">
+                    <img src="{{ item.Image.url }}" alt="img" width="120px" height="120px" style="display:inline-block; position:relative; margin-left: 38%; margin-top: 3%"></div>
+                    <div style="width:10%; float:left;" class="2">
+                    <button style="padding: 0px 7px; margin-top:15%; border-radius: 50%; background-color: #2456C1; color: white; font-size: 120%; border: none; cursor: pointer;"class="Delete" id="{{item.id}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <br><br><a style="margin-left: 0%; padding: 4px 7px; text-decoration: none; background:#2456C1; color: white;border-radius: 50%; font-size: 120%" class="Update" href="{% url 'Update' TheLoai item.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </div><br><br><br><br><br><br>
+                        {% for name, value in item.get_fields %}
+                        {% if value and name != "ID" and name != "Thời Gian" and name != "CommentUser" and name != "infocaunguyen ptr" and name != "Lời Cầu Nguyện" and name != "Hình Ảnh" and name != "Quê Quán" %}
+                            <p>{{ name }}: {{ value }}</p>
+                        {% endif %}
+                    {% empty %}
+                        <p>No articles yet</p>
+                    {% endfor %}
+                    <p>Lời cầu nguyện: {{ item.LoiCauNguyen }}</p>
+                    <p>Thời gian cầu nguyện: {{ item.ThoiGianCauNguyen }}</p>
+                    <p>Người Cầu Nguyện: {{ item.CommentUser.HoTen }}</p>
+                </div>
+                {% empty %}
+                    <p>No articles yet</p>
+                {% endfor %}
+            </div>
+            <div class="list-group">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+                <a class="list-group-item list-group-item-action" href="{% url 'List' Open='List' TheLoai=TheLoai %}">Danh sách đăng ký  <i class="fa fa-list"></i></a>
+                <a class="list-group-item list-group-item-action" href="{% url 'Filter' Open='List' TheLoai=TheLoai ID='0' %}">Đăng ký của bạn   <i class="fa fa-pencil-square-o"></i></a>
+                <a class="list-group-item list-group-item-action" href="{% url 'DKCN' TheLoai %}">Đăng ký   <i class="fa fa-user-plus"></i></a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="page">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            {% if Paginated.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ Paginated.previous_page_number }}">Previous</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+            {% endif %}
+            {% for i in Paginated.paginator.page_range %}
+              {% if Paginated.number == i %}
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">
+                    {{ i }}
+                    <span class="sr-only">(current)</span>
+                  </span>
+                </li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if Paginated.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ Paginated.next_page_number }}">Next</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block image %}
+{% endblock %}

@@ -1,0 +1,204 @@
+.footer {
+    padding: 0px;
+    vertical-align: bottom;
+    color:white;
+    margin-top: 28%;
+}
+
+li a
+{
+    font-size: 115%;
+}
+
+#content
+{
+    margin-left: 15%;
+    margin-top: 7%;
+    height: 79%;
+    width: 75%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: justify;
+    padding: 5px;
+    position: absolute;
+    z-index: 10;
+    display: block;
+    word-wrap: break-word;
+    overflow-y:scroll;
+}
+
+.container
+{
+    display: block;
+}
+
+.container h2{
+    width: 45%;
+    height: auto;
+    margin-top: 230px;
+    margin-left: 8%;
+    font-size: 30px;
+    color: white;
+    position: relative;
+    display: block;
+}
+
+#myInput {
+    background-image: url('search.ico');
+    background-size: 30px;
+    background-position: 6px 8px;
+    background-repeat: no-repeat;
+    width: 65%;
+    margin-left: 8%;
+    font-size: 16px;
+    padding: 12px 20px 12px 60px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    position: absolute;
+    display: block;
+}
+.container span
+{
+    background-color:#FFFF77;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 30px;
+    display: block;
+}
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 8%;
+    position: absolute;
+    display: block;
+    width: 65%;
+}
+
+#myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    display: block;
+    text-align: left;
+}
+
+.Delete
+{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
+.ac-results a, #result a
+{
+    color:#ED9E4A;
+    font-size: 100%;
+    text-decoration:none;
+    padding: 5%;
+}
+label
+{
+    color:white;
+    font-weight:bold;
+    font-size:120%;
+    padding:10px;
+    display: block;
+}
+
+input#id_q
+{
+    padding:8px;
+    border-radius:8px;
+    width: 100%;
+}
+
+ul li::marker
+{
+    content: "🧡";
+}
+ul#id_models
+{
+    margin-left: 10%;
+}
+input#search
+{
+    padding: 7.5px 15px;
+    background-color: #36A0AC;
+    color: white;
+    font-size: 120%;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 85%;
+    display:block;
+    position:absolute;
+}
+
+.searchform
+{
+    position: absolute;
+    margin-top: 10%;
+    margin-left: -1%;
+    height: 60%;
+    width: 16%;
+    z-index: 10;
+    border: none;
+    padding:15px;
+}
+
+body{
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.hide {
+    max-height: 0;
+}
+
+.dropdown1{
+    margin-top:2%;
+	border: 0.1em solid white;
+	width: 100%;
+	margin-bottom: 1em;
+	display: inline-block;
+}
+
+.dropdown1 .title{
+	margin: .3em .3em .3em .3em;
+	width: 97%;
+	color:white;
+	background-color:#36A0AC;
+	font-size:120%;
+	font-weight:bold;
+}
+
+.dropdown1 .menu{
+	transition: max-height .5s ease-out;
+	max-height: 15em;
+	overflow: hidden;
+}
+
+.dropdown1 .menu .option{
+	margin: .2em .2em .2em .2em;
+	margin-top: 0.3em;
+	font-size:80%;
+}
+
+.dropdown1 .menu .option:hover{
+	background: black;
+	font-size:80%;
+}
+
+.pointerCursor:hover{
+	cursor: pointer;
+	font-size:120%;
+}

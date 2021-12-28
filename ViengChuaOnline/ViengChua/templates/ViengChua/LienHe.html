@@ -1,0 +1,81 @@
+{% extends "ViengChua/MainPage.html" %}
+
+{% block title %}
+    <title> Liên Hệ </title>
+    <link rel="shortcut icon" href="http://tuvien.com/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet"  href="{% static 'ViengChua/lienhe.css' %}">
+{% endblock %}
+
+{% block logo %}
+    <a href="{% url 'MainPage' %}" class="logo">
+        <img src="{% static 'ViengChua/logo.png' %}" class="logo"/>
+    </a>
+{% endblock %}
+
+{% block form %}
+     <section>
+   <div class="container">
+     <div class="containerinfo">
+       <div>
+         <h2 style="text-align: center;">Thông Tin Liên Hệ</h2>
+           <li>
+           <div class="column">
+           <img src="{% static 'ViengChua/Cam.png' %}" width="110" height="100">
+           </div>
+           <div class="column">
+               <div style="margin-top: 10px;" class="1">
+           <span><i class="fa fa-user" aria-hidden="true"> Tín Cam</i></span>
+               <span><i class="fa fa-id-card-o" aria-hidden="true"> 18521496</i></span>
+               <span><i class="fa fa-instagram" aria-hidden="true"> chtins.cam</i></span>
+               </div>
+           </div>
+           </li>
+           <li>
+           <div class="column">
+           <img src="{% static 'ViengChua/Ngan.png' %}" width="110" height="100">
+           </div>
+           <div class="column">
+               <div style="margin-top: 10px;" class="1">
+           <span><i class="fa fa-user" aria-hidden="true"> Ngân Đù</i></span>
+               <span><i class="fa fa-id-card-o" aria-hidden="true"> 18521136</i></span>
+               <span><i class="fa fa-instagram" aria-hidden="true"> nglionnnnn</i></span>
+               </div>
+           </div>
+           </li>
+           <li>
+           <div class="column">
+           <img src="{% static 'ViengChua/Trung.png' %}" width="110" height="100">
+           </div>
+           <div class="column">
+               <div style="margin-top: 10px;" class="1">
+                <span><i class="fa fa-user" aria-hidden="true"> Trung Đoàn</i></span>
+               <span><i class="fa fa-id-card-o" aria-hidden="true"> 18521547</i></span>
+               <span><i class="fa fa-instagram"> minhtrung.i.am</i></span>
+               </div>
+           </div>
+           </li>
+         <ul class="info">
+           <li>
+             <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+             <span>Đại học Công Nghệ Thông Tin
+             </span>
+           </li>
+    </div>
+   </div>
+</section>
+<fieldset id="lienhe">
+    <legend id="Liên hệ">Contacts</legend>
+    <form id="form" action="." method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input id="submit" type="submit" value="Submit">
+    </form>
+</fieldset>
+{% endblock %}
+
+{% block image %}
+{% endblock %}

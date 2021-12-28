@@ -1,0 +1,1 @@
+web gunicorn ViengChuaOnline.wsgi:application --log-file -
